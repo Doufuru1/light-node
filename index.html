@@ -93,6 +93,23 @@
             border-color: var(--primary);
         }
         
+        .lang-btn {
+            padding: 6px 12px;
+            border: 1px solid rgba(242, 108, 34, 0.3);
+            border-radius: 16px;
+            background: transparent;
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-btn:hover {
+            background: rgba(242, 108, 34, 0.1);
+            border-color: rgba(242, 108, 34, 0.5);
+        }
+        
         /* 主内容区 */
         .main-content {
             padding-top: 60px;
@@ -398,6 +415,7 @@
             <img src="logo.png" alt="LIGHT NODE">
             <span class="logo-text">LIGHT NODE</span>
         </div>
+        <button class="lang-btn" onclick="toggleLanguage()">中/EN</button>
         <button class="connect-btn" id="connectBtn" onclick="connectWallet()">链接钱包</button>
     </header>
 
@@ -502,6 +520,78 @@
     </nav>
 
     <script>
+        let currentLang = 'zh';
+        
+        const translations = {
+            zh: {
+                connectWallet: '链接钱包',
+                connecting: '连接中...',
+                connected: '钱包连接成功！',
+                disconnect: '链接钱包',
+                pleaseConnect: '请先连接钱包！',
+                claim: '领取',
+                claiming: '领取中...',
+                claimed: '已领取',
+                home: '首页',
+                lightNode: '轻节点',
+                holdingRights: '持有权益',
+                holdingDesc: 'LIGHT NODE NFT 是链上收益权益证明，持有即代表拥有轻节点身份。<br><br>持有者可随时领取对应收益，无需复杂操作，只需持有 NFT 即可获得节点权益身份。<br><br><span class="highlight">NFT 即凭证，持有即权益。</span>',
+                nodeCount: '持有 LIGHT NODE 数量',
+                claimUsdt: '可领取 USDT',
+                claimPga: '可领取 PGA',
+                record: '领取记录'
+            },
+            en: {
+                connectWallet: 'Connect Wallet',
+                connecting: 'Connecting...',
+                connected: 'Wallet Connected!',
+                disconnect: 'Disconnect',
+                pleaseConnect: 'Please connect wallet first!',
+                claim: 'Claim',
+                claiming: 'Claiming...',
+                claimed: 'Claimed',
+                home: 'Home',
+                lightNode: 'Light Node',
+                holdingRights: 'Holding Rights',
+                holdingDesc: 'LIGHT NODE NFT is an on-chain revenue rights certificate. Holding it represents having a light node identity.<br><br>Holders can claim corresponding income at any time without complex operations. Simply holding the NFT grants you node rights.<br><br><span class="highlight">NFT is the certificate, holding is the right.</span>',
+                nodeCount: 'LIGHT NODE Holdings',
+                claimUsdt: 'Claimable USDT',
+                claimPga: 'Claimable PGA',
+                record: 'Claim Record'
+            }
+        };
+        
+        function toggleLanguage() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            const t = translations[currentLang];
+            
+            // 更新按钮文字
+            if (!walletConnected) {
+                document.getElementById('connectBtn').textContent = t.connectWallet;
+            }
+            
+            // 更新导航
+            document.querySelectorAll('.nav-label')[0].textContent = t.home;
+            document.querySelectorAll('.nav-label')[1].textContent = t.lightNode;
+            
+            // 更新首页内容
+            document.querySelector('.card-title').textContent = t.holdingRights;
+            document.querySelector('.card-text').innerHTML = t.holdingDesc;
+            
+            // 更新轻节点页面
+            document.querySelector('.node-label').textContent = t.nodeCount;
+            document.querySelectorAll('.income-label')[0].textContent = t.claimUsdt;
+            document.querySelectorAll('.income-label')[1].textContent = t.claimPga;
+            document.querySelector('.card-title').textContent = t.record;
+            
+            // 更新领取按钮
+            document.querySelectorAll('.claim-btn').forEach(btn => {
+                if (!btn.disabled) {
+                    btn.textContent = t.claim;
+                }
+            });
+        }
+        
         // 页面切换
         function switchPage(page) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -517,23 +607,22 @@
         
         function connectWallet() {
             const btn = document.getElementById('connectBtn');
+            const t = translations[currentLang];
             
             if (!walletConnected) {
-                // 模拟连接钱包
-                btn.textContent = '连接中...';
+                btn.textContent = t.connecting;
                 
                 setTimeout(() => {
                     walletConnected = true;
                     walletAddress = '0x' + Math.random().toString(16).substr(2, 8) + '...' + Math.random().toString(16).substr(2, 4);
                     btn.textContent = walletAddress;
                     btn.classList.add('connected');
-                    alert('钱包连接成功！');
+                    alert(t.connected);
                 }, 1500);
             } else {
-                // 断开连接
                 walletConnected = false;
                 walletAddress = '';
-                btn.textContent = '链接钱包';
+                btn.textContent = t.connectWallet;
                 btn.classList.remove('connected');
             }
         }
@@ -544,20 +633,20 @@
             const income = type === 'USDT' ? document.getElementById('usdtIncome').textContent : document.getElementById('pgaIncome').textContent;
             const unit = type;
             const today = new Date().toISOString().split('T')[0];
+            const t = translations[currentLang];
             
             if (!walletConnected) {
-                alert('请先连接钱包！');
+                alert(t.pleaseConnect);
                 return;
             }
             
             btn.disabled = true;
-            btn.textContent = '领取中...';
+            btn.textContent = t.claiming;
             
             setTimeout(() => {
-                btn.textContent = '已领取';
+                btn.textContent = t.claimed;
                 btn.disabled = true;
                 
-                // 添加记录
                 const recordList = document.getElementById('recordList');
                 const newRecord = document.createElement('div');
                 newRecord.className = 'record-item';
@@ -566,20 +655,18 @@
                         <span class="record-date">${today}</span>
                         <span class="record-amount">+${income} ${unit}</span>
                     </div>
-                    <span class="record-status">已领取</span>
+                    <span class="record-status">${t.claimed}</span>
                 `;
                 recordList.insertBefore(newRecord, recordList.firstChild);
                 
-                // 重置收益
                 if (type === 'USDT') {
                     document.getElementById('usdtIncome').textContent = '0.00';
                 } else {
                     document.getElementById('pgaIncome').textContent = '0.00';
                 }
                 
-                // 3秒后恢复按钮
                 setTimeout(() => {
-                    btn.textContent = '领取 ' + unit;
+                    btn.textContent = t.claim;
                     btn.disabled = false;
                 }, 3000);
             }, 1500);
