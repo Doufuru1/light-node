@@ -9,9 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #FF6B35;
-            --primary-dark: #E55A2B;
-            --primary-glow: rgba(255, 107, 53, 0.5);
+            --primary: #F36B25;
+            --primary-dark: #D85A1B;
+            --primary-glow: rgba(243, 107, 37, 0.5);
             --bg: #0A0A0A;
             --card-bg: rgba(255, 255, 255, 0.03);
             --border: rgba(255, 255, 255, 0.06);
@@ -53,15 +53,14 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
         
-        .logo-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--primary);
-            border-radius: 50%;
-            box-shadow: 0 0 8px var(--primary-glow);
+        .logo img {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            object-fit: contain;
         }
         
         .logo-text {
@@ -73,7 +72,7 @@
         
         .connect-btn {
             padding: 8px 16px;
-            border: 1px solid rgba(255, 107, 53, 0.3);
+            border: 1px solid rgba(243, 107, 37, 0.3);
             border-radius: 8px;
             background: transparent;
             color: var(--primary);
@@ -84,8 +83,8 @@
         }
         
         .connect-btn:hover {
-            background: rgba(255, 107, 53, 0.1);
-            border-color: rgba(255, 107, 53, 0.5);
+            background: rgba(243, 107, 37, 0.1);
+            border-color: rgba(243, 107, 37, 0.5);
         }
         
         /* 主内容区 */
@@ -109,26 +108,15 @@
         /* 首页样式 */
         .hero-section {
             text-align: center;
-            padding: 40px 0 30px;
+            padding: 60px 0 40px;
         }
         
-        .hero-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.2), rgba(255, 107, 53, 0.05));
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .hero-logo {
+            width: 100px;
+            height: 100px;
             margin: 0 auto 24px;
-            border: 1px solid rgba(255, 107, 53, 0.2);
-            position: relative;
-        }
-        
-        .hero-icon::before {
-            content: '◆';
-            font-size: 36px;
-            color: var(--primary);
+            border-radius: 20px;
+            object-fit: contain;
         }
         
         .hero-title {
@@ -183,47 +171,6 @@
             font-weight: 600;
         }
         
-        /* 权益列表 */
-        .benefit-list {
-            list-style: none;
-        }
-        
-        .benefit-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 14px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .benefit-item:last-child {
-            border-bottom: none;
-        }
-        
-        .benefit-icon {
-            width: 36px;
-            height: 36px;
-            background: rgba(255, 107, 53, 0.1);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: 16px;
-        }
-        
-        .benefit-content h3 {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-        
-        .benefit-content p {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.5);
-            line-height: 1.5;
-        }
-        
         /* 轻节点页面 */
         .node-stats {
             text-align: center;
@@ -245,8 +192,8 @@
         }
         
         .income-card {
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 107, 53, 0.02));
-            border: 1px solid rgba(255, 107, 53, 0.2);
+            background: linear-gradient(135deg, rgba(243, 107, 37, 0.1), rgba(243, 107, 37, 0.02));
+            border: 1px solid rgba(243, 107, 37, 0.2);
             border-radius: 16px;
             padding: 24px;
             text-align: center;
@@ -337,7 +284,7 @@
             font-size: 12px;
             padding: 4px 10px;
             border-radius: 6px;
-            background: rgba(255, 107, 53, 0.1);
+            background: rgba(243, 107, 37, 0.1);
             color: var(--primary);
         }
         
@@ -421,7 +368,7 @@
         }
         
         ::-webkit-scrollbar-thumb {
-            background: rgba(255, 107, 53, 0.3);
+            background: rgba(243, 107, 37, 0.3);
             border-radius: 2px;
         }
     </style>
@@ -430,7 +377,7 @@
     <!-- 顶部栏 -->
     <header class="header">
         <div class="logo">
-            <div class="logo-dot"></div>
+            <img src="logo.jpg" alt="LIGHT NODE">
             <span class="logo-text">LIGHT NODE</span>
         </div>
         <button class="connect-btn" onclick="connectWallet()">链接钱包</button>
@@ -438,71 +385,23 @@
 
     <!-- 主内容 -->
     <main class="main-content">
-        <!-- 首页 -->
+        <!-- 首页 - 简化版 -->
         <div class="page active" id="page-home">
             <div class="hero-section">
-                <div class="hero-icon"></div>
+                <img src="logo.jpg" alt="LIGHT NODE" class="hero-logo">
                 <h1 class="hero-title">LIGHT NODE NFT</h1>
-                <p class="hero-subtitle">链上收益权益证明型 NFT<br>持有即权益，收益每天发生</p>
+                <p class="hero-subtitle">持有 NFT 收益权益证明<br>持有即权益，收益每天发生</p>
             </div>
             
             <div class="card">
                 <h2 class="card-title">
                     <span class="card-title-icon"></span>
-                    核心定位
+                    持有权益
                 </h2>
                 <p class="card-text">
-                    <span class="highlight">LIGHT NODE NFT = 轻节点身份 + 收益权益证明 + 生态参与凭证</span><br><br>
-                    持有 LIGHT NODE NFT，意味着用户拥有轻节点身份，可持续参与生态收益分配，享受每日收益领取权益。
-                </p>
-            </div>
-            
-            <div class="card">
-                <h2 class="card-title">
-                    <span class="card-title-icon"></span>
-                    核心权益
-                </h2>
-                <ul class="benefit-list">
-                    <li class="benefit-item">
-                        <div class="benefit-icon">💎</div>
-                        <div class="benefit-content">
-                            <h3>每日收益领取</h3>
-                            <p>持有 LIGHT NODE NFT 的用户，可根据节点权益规则每日领取对应收益</p>
-                        </div>
-                    </li>
-                    <li class="benefit-item">
-                        <div class="benefit-icon">🔐</div>
-                        <div class="benefit-content">
-                            <h3>节点身份凭证</h3>
-                            <p>NFT 作为链上权益证明，公开透明，可验证、可持有、可流转</p>
-                        </div>
-                    </li>
-                    <li class="benefit-item">
-                        <div class="benefit-icon">🚀</div>
-                        <div class="benefit-content">
-                            <h3>生态增长参与</h3>
-                            <p>持有者不仅是用户，也是生态节点参与者，可共同见证项目发展与价值增长</p>
-                        </div>
-                    </li>
-                    <li class="benefit-item">
-                        <div class="benefit-icon">⏳</div>
-                        <div class="benefit-content">
-                            <h3>长期权益沉淀</h3>
-                            <p>NFT 具备身份属性、权益属性和生态价值属性，适合长期持有</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            
-            <div class="card">
-                <h2 class="card-title">
-                    <span class="card-title-icon"></span>
-                    项目价值
-                </h2>
-                <p class="card-text">
-                    LIGHT NODE NFT 让普通用户能够以更轻量的方式参与节点生态，无需复杂操作，只需持有 NFT，即可获得节点权益身份，并每日领取对应收益。<br><br>
-                    <span class="highlight">NFT 即凭证，持有即权益。</span><br><br>
-                    LIGHT NODE NFT，让收益每天发生。
+                    <span class="highlight">LIGHT NODE NFT</span> 是链上收益权益证明，持有即代表拥有轻节点身份。<br><br>
+                    持有者可每日领取对应收益，无需复杂操作，只需持有 NFT 即可获得节点权益身份。<br><br>
+                    <span class="highlight">NFT 即凭证，持有即权益。</span>
                 </p>
             </div>
         </div>
