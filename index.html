@@ -8,6 +8,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #FF6B35;
+            --primary-dark: #E55A2B;
+            --primary-glow: rgba(255, 107, 53, 0.5);
+            --bg: #0A0A0A;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.06);
+            --text: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.5);
+            --text-tertiary: rgba(255, 255, 255, 0.6);
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -16,8 +28,8 @@
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #0A0A0A;
-            color: #FFFFFF;
+            background: var(--bg);
+            color: var(--text);
             min-height: 100vh;
             overflow-x: hidden;
         }
@@ -47,9 +59,9 @@
         .logo-dot {
             width: 8px;
             height: 8px;
-            background: #00FF82;
+            background: var(--primary);
             border-radius: 50%;
-            box-shadow: 0 0 8px rgba(0, 255, 130, 0.5);
+            box-shadow: 0 0 8px var(--primary-glow);
         }
         
         .logo-text {
@@ -61,10 +73,10 @@
         
         .connect-btn {
             padding: 8px 16px;
-            border: 1px solid rgba(0, 255, 130, 0.3);
+            border: 1px solid rgba(255, 107, 53, 0.3);
             border-radius: 8px;
             background: transparent;
-            color: #00FF82;
+            color: var(--primary);
             font-size: 13px;
             font-weight: 500;
             cursor: pointer;
@@ -72,8 +84,8 @@
         }
         
         .connect-btn:hover {
-            background: rgba(0, 255, 130, 0.1);
-            border-color: rgba(0, 255, 130, 0.5);
+            background: rgba(255, 107, 53, 0.1);
+            border-color: rgba(255, 107, 53, 0.5);
         }
         
         /* 主内容区 */
@@ -103,27 +115,27 @@
         .hero-icon {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, rgba(0, 255, 130, 0.2), rgba(0, 255, 130, 0.05));
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.2), rgba(255, 107, 53, 0.05));
             border-radius: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 24px;
-            border: 1px solid rgba(0, 255, 130, 0.2);
+            border: 1px solid rgba(255, 107, 53, 0.2);
             position: relative;
         }
         
         .hero-icon::before {
             content: '◆';
             font-size: 36px;
-            color: #00FF82;
+            color: var(--primary);
         }
         
         .hero-title {
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 12px;
-            background: linear-gradient(135deg, #FFFFFF, #00FF82);
+            background: linear-gradient(135deg, #FFFFFF, var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -156,7 +168,7 @@
         .card-title-icon {
             width: 6px;
             height: 6px;
-            background: #00FF82;
+            background: var(--primary);
             border-radius: 50%;
         }
         
@@ -167,7 +179,7 @@
         }
         
         .highlight {
-            color: #00FF82;
+            color: var(--primary);
             font-weight: 600;
         }
         
@@ -191,7 +203,7 @@
         .benefit-icon {
             width: 36px;
             height: 36px;
-            background: rgba(0, 255, 130, 0.1);
+            background: rgba(255, 107, 53, 0.1);
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -221,10 +233,10 @@
         .node-count {
             font-size: 56px;
             font-weight: 700;
-            color: #00FF82;
+            color: var(--primary);
             line-height: 1;
             margin-bottom: 8px;
-            text-shadow: 0 0 30px rgba(0, 255, 130, 0.3);
+            text-shadow: 0 0 30px var(--primary-glow);
         }
         
         .node-label {
@@ -233,8 +245,8 @@
         }
         
         .income-card {
-            background: linear-gradient(135deg, rgba(0, 255, 130, 0.1), rgba(0, 255, 130, 0.02));
-            border: 1px solid rgba(0, 255, 130, 0.2);
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 107, 53, 0.02));
+            border: 1px solid rgba(255, 107, 53, 0.2);
             border-radius: 16px;
             padding: 24px;
             text-align: center;
@@ -250,7 +262,7 @@
         .income-value {
             font-size: 36px;
             font-weight: 700;
-            color: #00FF82;
+            color: var(--primary);
             margin-bottom: 4px;
         }
         
@@ -262,10 +274,10 @@
         .claim-btn {
             width: 100%;
             padding: 16px;
-            background: linear-gradient(135deg, #00FF82, #00CC68);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             border: none;
             border-radius: 12px;
-            color: #0A0A0A;
+            color: #FFFFFF;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
@@ -275,7 +287,7 @@
         
         .claim-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 255, 130, 0.3);
+            box-shadow: 0 8px 24px var(--primary-glow);
         }
         
         .claim-btn:disabled {
@@ -318,15 +330,15 @@
         .record-amount {
             font-size: 16px;
             font-weight: 600;
-            color: #00FF82;
+            color: var(--primary);
         }
         
         .record-status {
             font-size: 12px;
             padding: 4px 10px;
             border-radius: 6px;
-            background: rgba(0, 255, 130, 0.1);
-            color: #00FF82;
+            background: rgba(255, 107, 53, 0.1);
+            color: var(--primary);
         }
         
         /* 底部导航 */
@@ -363,7 +375,7 @@
             transform: translateX(-50%);
             width: 20px;
             height: 3px;
-            background: #00FF82;
+            background: var(--primary);
             border-radius: 2px;
         }
         
@@ -375,7 +387,7 @@
         
         .nav-item.active .nav-icon {
             opacity: 1;
-            color: #00FF82;
+            color: var(--primary);
         }
         
         .nav-label {
@@ -386,7 +398,7 @@
         
         .nav-item.active .nav-label {
             opacity: 1;
-            color: #00FF82;
+            color: var(--primary);
         }
         
         /* 动画 */
@@ -409,7 +421,7 @@
         }
         
         ::-webkit-scrollbar-thumb {
-            background: rgba(0, 255, 130, 0.3);
+            background: rgba(255, 107, 53, 0.3);
             border-radius: 2px;
         }
     </style>
