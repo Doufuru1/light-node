@@ -88,6 +88,11 @@
             border-color: rgba(242, 108, 34, 0.5);
         }
         
+        .connect-btn.connected {
+            background: rgba(242, 108, 34, 0.15);
+            border-color: var(--primary);
+        }
+        
         /* 主内容区 */
         .main-content {
             padding-top: 60px;
@@ -109,15 +114,18 @@
         /* 首页样式 */
         .hero-section {
             text-align: center;
-            padding: 60px 0 40px;
+            padding: 40px 0 30px;
         }
         
         .hero-logo {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             margin: 0 auto 24px;
-            border-radius: 20px;
+            border-radius: 16px;
             object-fit: contain;
+            background: linear-gradient(135deg, rgba(242, 108, 34, 0.15), rgba(242, 108, 34, 0.05));
+            padding: 12px;
+            border: 1px solid rgba(242, 108, 34, 0.2);
         }
         
         .hero-title {
@@ -192,13 +200,17 @@
             color: rgba(255, 255, 255, 0.5);
         }
         
+        .income-section {
+            margin-bottom: 20px;
+        }
+        
         .income-card {
             background: linear-gradient(135deg, rgba(242, 108, 34, 0.1), rgba(242, 108, 34, 0.02));
             border: 1px solid rgba(242, 108, 34, 0.2);
             border-radius: 16px;
-            padding: 24px;
+            padding: 20px;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
         }
         
         .income-label {
@@ -208,7 +220,7 @@
         }
         
         .income-value {
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 4px;
@@ -219,18 +231,23 @@
             color: rgba(255, 255, 255, 0.5);
         }
         
+        .claim-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
         .claim-btn {
-            width: 100%;
-            padding: 16px;
+            flex: 1;
+            padding: 14px;
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             border: none;
             border-radius: 12px;
             color: #FFFFFF;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-bottom: 20px;
         }
         
         .claim-btn:hover {
@@ -381,7 +398,7 @@
             <img src="logo.png" alt="LIGHT NODE">
             <span class="logo-text">LIGHT NODE</span>
         </div>
-        <button class="connect-btn" onclick="connectWallet()">链接钱包</button>
+        <button class="connect-btn" id="connectBtn" onclick="connectWallet()">链接钱包</button>
     </header>
 
     <!-- 主内容 -->
@@ -391,7 +408,7 @@
             <div class="hero-section">
                 <img src="logo.png" alt="LIGHT NODE" class="hero-logo">
                 <h1 class="hero-title">LIGHT NODE NFT</h1>
-                <p class="hero-subtitle">持有 NFT 收益权益证明<br>持有即权益，收益每天发生</p>
+                <p class="hero-subtitle">持有 NFT 收益权益证明<br>持有即权益，收益实时产生</p>
             </div>
             
             <div class="card">
@@ -401,7 +418,7 @@
                 </h2>
                 <p class="card-text">
                     <span class="highlight">LIGHT NODE NFT</span> 是链上收益权益证明，持有即代表拥有轻节点身份。<br><br>
-                    持有者可每日领取对应收益，无需复杂操作，只需持有 NFT 即可获得节点权益身份。<br><br>
+                    持有者可随时领取对应收益，无需复杂操作，只需持有 NFT 即可获得节点权益身份。<br><br>
                     <span class="highlight">NFT 即凭证，持有即权益。</span>
                 </p>
             </div>
@@ -414,13 +431,24 @@
                 <div class="node-label">持有 LIGHT NODE 数量</div>
             </div>
             
-            <div class="income-card">
-                <div class="income-label">当日可领取收益</div>
-                <div class="income-value" id="todayIncome">12.50</div>
-                <div class="income-unit">USDT</div>
+            <div class="income-section">
+                <div class="income-card">
+                    <div class="income-label">可领取 USDT 收益</div>
+                    <div class="income-value" id="usdtIncome">12.50</div>
+                    <div class="income-unit">USDT</div>
+                </div>
+                
+                <div class="income-card">
+                    <div class="income-label">可领取 PGA 收益</div>
+                    <div class="income-value" id="pgaIncome">850.00</div>
+                    <div class="income-unit">PGA</div>
+                </div>
             </div>
             
-            <button class="claim-btn" id="claimBtn" onclick="claimIncome()">领取当日收益</button>
+            <div class="claim-buttons">
+                <button class="claim-btn" id="claimUsdtBtn" onclick="claimIncome('USDT')">领取 USDT</button>
+                <button class="claim-btn" id="claimPgaBtn" onclick="claimIncome('PGA')">领取 PGA</button>
+            </div>
             
             <div class="card">
                 <h2 class="card-title">
@@ -437,6 +465,13 @@
                     </div>
                     <div class="record-item">
                         <div class="record-info">
+                            <span class="record-date">2026-06-29</span>
+                            <span class="record-amount">+850.00 PGA</span>
+                        </div>
+                        <span class="record-status">已领取</span>
+                    </div>
+                    <div class="record-item">
+                        <div class="record-info">
                             <span class="record-date">2026-06-28</span>
                             <span class="record-amount">+12.50 USDT</span>
                         </div>
@@ -444,8 +479,8 @@
                     </div>
                     <div class="record-item">
                         <div class="record-info">
-                            <span class="record-date">2026-06-27</span>
-                            <span class="record-amount">+12.50 USDT</span>
+                            <span class="record-date">2026-06-28</span>
+                            <span class="record-amount">+850.00 PGA</span>
                         </div>
                         <span class="record-status">已领取</span>
                     </div>
@@ -477,15 +512,43 @@
         }
         
         // 连接钱包
+        let walletConnected = false;
+        let walletAddress = '';
+        
         function connectWallet() {
-            alert('请连接您的钱包');
+            const btn = document.getElementById('connectBtn');
+            
+            if (!walletConnected) {
+                // 模拟连接钱包
+                btn.textContent = '连接中...';
+                
+                setTimeout(() => {
+                    walletConnected = true;
+                    walletAddress = '0x' + Math.random().toString(16).substr(2, 8) + '...' + Math.random().toString(16).substr(2, 4);
+                    btn.textContent = walletAddress;
+                    btn.classList.add('connected');
+                    alert('钱包连接成功！');
+                }, 1500);
+            } else {
+                // 断开连接
+                walletConnected = false;
+                walletAddress = '';
+                btn.textContent = '链接钱包';
+                btn.classList.remove('connected');
+            }
         }
         
         // 领取收益
-        function claimIncome() {
-            const btn = document.getElementById('claimBtn');
-            const income = document.getElementById('todayIncome').textContent;
+        function claimIncome(type) {
+            const btn = type === 'USDT' ? document.getElementById('claimUsdtBtn') : document.getElementById('claimPgaBtn');
+            const income = type === 'USDT' ? document.getElementById('usdtIncome').textContent : document.getElementById('pgaIncome').textContent;
+            const unit = type;
             const today = new Date().toISOString().split('T')[0];
+            
+            if (!walletConnected) {
+                alert('请先连接钱包！');
+                return;
+            }
             
             btn.disabled = true;
             btn.textContent = '领取中...';
@@ -501,14 +564,24 @@
                 newRecord.innerHTML = `
                     <div class="record-info">
                         <span class="record-date">${today}</span>
-                        <span class="record-amount">+${income} USDT</span>
+                        <span class="record-amount">+${income} ${unit}</span>
                     </div>
                     <span class="record-status">已领取</span>
                 `;
                 recordList.insertBefore(newRecord, recordList.firstChild);
                 
                 // 重置收益
-                document.getElementById('todayIncome').textContent = '0.00';
+                if (type === 'USDT') {
+                    document.getElementById('usdtIncome').textContent = '0.00';
+                } else {
+                    document.getElementById('pgaIncome').textContent = '0.00';
+                }
+                
+                // 3秒后恢复按钮
+                setTimeout(() => {
+                    btn.textContent = '领取 ' + unit;
+                    btn.disabled = false;
+                }, 3000);
             }, 1500);
         }
     </script>
