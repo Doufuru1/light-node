@@ -461,11 +461,28 @@
                     <div class="income-value" id="pgaIncome">850.00</div>
                     <div class="income-unit">PGA</div>
                 </div>
+                
+                <div class="income-card">
+                    <div class="income-label">可领取 FXH 收益</div>
+                    <div class="income-value" id="fxhIncome">1,250.00</div>
+                    <div class="income-unit">FXH</div>
+                </div>
+                
+                <div class="income-card">
+                    <div class="income-label">可领取 GWA 收益</div>
+                    <div class="income-value" id="gwaIncome">500.00</div>
+                    <div class="income-unit">GWA</div>
+                </div>
             </div>
             
             <div class="claim-buttons">
                 <button class="claim-btn" id="claimUsdtBtn" onclick="claimIncome('USDT')">领取 USDT</button>
                 <button class="claim-btn" id="claimPgaBtn" onclick="claimIncome('PGA')">领取 PGA</button>
+            </div>
+            
+            <div class="claim-buttons">
+                <button class="claim-btn" id="claimFxhBtn" onclick="claimIncome('FXH')">领取 FXH</button>
+                <button class="claim-btn" id="claimGwaBtn" onclick="claimIncome('GWA')">领取 GWA</button>
             </div>
             
             <div class="card">
@@ -537,8 +554,10 @@
                 holdingRights: '持有权益',
                 holdingDesc: 'LIGHT NODE NFT 是链上收益权益证明，持有即代表拥有轻节点身份。<br><br>持有者可随时领取对应收益，无需复杂操作，只需持有 NFT 即可获得节点权益身份。<br><br><span class="highlight">NFT 即凭证，持有即权益。</span>',
                 nodeCount: '持有 LIGHT NODE 数量',
-                claimUsdt: '可领取 USDT',
-                claimPga: '可领取 PGA',
+                claimUsdt: '可领取 USDT 收益',
+                claimPga: '可领取 PGA 收益',
+                claimFxh: '可领取 FXH 收益',
+                claimGwa: '可领取 GWA 收益',
                 record: '领取记录'
             },
             en: {
@@ -557,6 +576,8 @@
                 nodeCount: 'LIGHT NODE Holdings',
                 claimUsdt: 'Claimable USDT',
                 claimPga: 'Claimable PGA',
+                claimFxh: 'Claimable FXH',
+                claimGwa: 'Claimable GWA',
                 record: 'Claim Record'
             }
         };
@@ -580,8 +601,11 @@
             
             // 更新轻节点页面
             document.querySelector('.node-label').textContent = t.nodeCount;
-            document.querySelectorAll('.income-label')[0].textContent = t.claimUsdt;
-            document.querySelectorAll('.income-label')[1].textContent = t.claimPga;
+            const incomeLabels = document.querySelectorAll('.income-label');
+            incomeLabels[0].textContent = t.claimUsdt;
+            incomeLabels[1].textContent = t.claimPga;
+            incomeLabels[2].textContent = t.claimFxh;
+            incomeLabels[3].textContent = t.claimGwa;
             document.querySelector('.card-title').textContent = t.record;
             
             // 更新领取按钮
@@ -629,8 +653,20 @@
         
         // 领取收益
         function claimIncome(type) {
-            const btn = type === 'USDT' ? document.getElementById('claimUsdtBtn') : document.getElementById('claimPgaBtn');
-            const income = type === 'USDT' ? document.getElementById('usdtIncome').textContent : document.getElementById('pgaIncome').textContent;
+            const btnMap = {
+                'USDT': 'claimUsdtBtn',
+                'PGA': 'claimPgaBtn',
+                'FXH': 'claimFxhBtn',
+                'GWA': 'claimGwaBtn'
+            };
+            const incomeMap = {
+                'USDT': 'usdtIncome',
+                'PGA': 'pgaIncome',
+                'FXH': 'fxhIncome',
+                'GWA': 'gwaIncome'
+            };
+            const btn = document.getElementById(btnMap[type]);
+            const income = document.getElementById(incomeMap[type]).textContent;
             const unit = type;
             const today = new Date().toISOString().split('T')[0];
             const t = translations[currentLang];
@@ -661,8 +697,12 @@
                 
                 if (type === 'USDT') {
                     document.getElementById('usdtIncome').textContent = '0.00';
-                } else {
+                } else if (type === 'PGA') {
                     document.getElementById('pgaIncome').textContent = '0.00';
+                } else if (type === 'FXH') {
+                    document.getElementById('fxhIncome').textContent = '0.00';
+                } else if (type === 'GWA') {
+                    document.getElementById('gwaIncome').textContent = '0.00';
                 }
                 
                 setTimeout(() => {
